@@ -77,7 +77,7 @@ evoked.shift_time(-0.004)
 evoked.plot(window_title="Evoked")
 
 
-########### STD _& DEV
+########### STD _& DEV (event=4, 11)
 ########### epochs.['standard'].average()
 ##### std와 dev 모두 표시한 다음 difference 구하기
 
@@ -89,9 +89,7 @@ epochs.drop_bad()
 epochs_standard = mne.concatenate_epochs([epochs['standard'][range(40)],
                                           epochs['standard'][182:222]])
 epochs_standard.load_data()  # Resampling to save memory.
-epochs_standard.resample(600, npad='auto')
 epochs_deviant = epochs['deviant'].load_data()
-epochs_deviant.resample(600, npad='auto')
 del epochs, picks
 
 ###############################################################################
