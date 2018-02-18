@@ -40,7 +40,8 @@ event_id = dict(standard=4, deviant=11)
 tmin = -0.2
 tmax = 0.5
 #Define the baseline period
-baseline = (None, 0)  # means from the first instant to t = 0
+baseline = (None, -100)  # means from the first instant to t = 0
+
 #Define peak-to-peak rejection parameters for EOG
 reject = dict(eog=250e-6)
 
@@ -58,8 +59,11 @@ epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks,
                     baseline=(None, 0), reject=reject, preload=False)
 
 epochs.plot()
+
+
 # compute evoked
 evoked = epochs['deviant'].average()
+evoked_std = epochs['standard'].average()
 
 ######################Get Evoke#########################
 # remove physiological artifacts (eyeblinks, heartbeats) using SSP on baseline
@@ -80,6 +84,18 @@ evoked.plot(window_title="Evoked")
 ########### STD _& DEV (event=4, 11)
 ########### epochs.['standard'].average()
 ##### std와 dev 모두 표시한 다음 difference 구하기
+## Code 질문
+# 1. event_id - dict (standard=4, deviant=11)
+#이후, evoked = deviant.average()는 있는데 standard.average()는 없음
+#
+#2. extract event에서 STI 014의 의미는?
+#
+#3. compute evoked에서도 마찬가지로 std의 부재
+#
+#4. concatenate_epoch에서 index와 range의 의미
+#
+#5. load_data 및 del, difference 확인
+
 
 # We only use first 40 good epochs from each run. Since we first drop the bad
 # epochs, the indices of the epochs are no longer same as in the original
