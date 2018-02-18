@@ -63,12 +63,15 @@ def for_diff(file_name):
     evoked = epochs['deviant'].average()
     evoked_std = epochs['standard'].average()
 
+    # Compute Difference wave
     evoked_difference = mne.combine_evoked([evoked, -evoked_std], weights='equal')
     evoked_difference.pick_channels(['Pz'])
     # evoked_difference.plot(window_title='Difference_mmn', gfp=True)
 
     return evoked_difference
 
+
+# Compute Grand_Average_Differece_wave
 
 file_name = ["./raw/ph01a.vhdr", "./raw/ph02a.vhdr",  "./raw/ph06b.vhdr"]
 diff_list = []
